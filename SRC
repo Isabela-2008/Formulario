@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+    <link rel="stylesheet" href="estilo.css">
+    <style>
+        /* Estilo para o botão "Voltar" */
+        #voltar {
+            display: none; /* Inicialmente escondido */
+            background-color: #ff94b7;
+            color: #fff;
+            font-size: 12px; /* Diminui o tamanho da fonte */
+            font-weight: bold;
+            border: none;
+            padding: 5px 10px; /* Botão pequeno */
+            border-radius: 5px; /* Bordas arredondadas */
+            cursor: pointer;
+        }
+
+        #voltar:hover {
+            background-color: #ff74a1; 
+        }
+    </style>
+</head>
+<body>
+    <div id="cadastroTela">
+        <form id="cadastroForm">
+            <h1>Formulário</h1> 
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" required>
+            
+            <label for="endereco">Endereço</label>
+            <input type="text" id="endereco" required>
+            
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required pattern="\(\d{2}\) \d{4,5}-\d{4}">
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+            
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" required minlength="6">
+            
+            <p id="mensagemSucesso" style="display: none; color: #ff94b7; font-weight: bold;">
+                Cadastro feito com sucesso, Seja bem-vindo(a)!
+            </p>
+
+            <button type="button" onclick="exibirMensagem()">Entrar</button> 
+            <button id="voltar" type="button" onclick="limparCampos()">Voltar</button>
+        </form>
+    </div>
+
+    <script>
+        // Função para exibir a mensagem e o botão "Voltar"
+        function exibirMensagem() {
+            const mensagem = document.getElementById('mensagemSucesso');
+            const voltarBotao = document.getElementById('voltar');
+            
+            mensagem.style.display = 'block'; // Exibe a mensagem
+            voltarBotao.style.display = 'inline-block'; // Mostra o botão "Voltar"
+        }
+
+        // Função para limpar os campos e ocultar a mensagem
+        function limparCampos() {
+            const form = document.getElementById('cadastroForm');
+            form.reset(); // Limpa todos os campos do formulário
+            const mensagem = document.getElementById('mensagemSucesso');
+            const voltarBotao = document.getElementById('voltar');
+
+            mensagem.style.display = 'none'; // Oculta a mensagem
+            voltarBotao.style.display = 'none'; // Oculta o botão "Voltar"
+        }
+    </script>
+</body>
+</html>
+
+// Armazenar dados de cadastro
+let usuario = {};
+
+document.getElementById('cadastroForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+    // Coleta os valores dos campos
+    const nome = document.getElementById('nome').value.trim();
+    const endereco = document.getElementById('endereco').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const senha = document.getElementById('senha').value.trim();
+
+    // Verifica se todos os campos estão preenchidos
+    if (nome && endereco && telefone && email && senha) {
+        usuario = {
+            nome,
+            endereco,
+            telefone,
+            email,
+            senha
+        };
+
+        // Exibe a mensagem de sucesso
+        alert('Cadastro feito com sucesso, Seja bem-vindo(a)!');
+
+        // Redireciona para a tela de login
+        document.getElementById('cadastroTela').style.display = 'none';
+        document.getElementById('loginTela').style.display = 'block';
+    } else {
+        // Caso algum campo esteja vazio
+        alert('Por favor, preencha todos os campos corretamente.');
+    }
+});
+
+document.getElementById('loginForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+    const emailLogin = document.getElementById('emailLogin').value.trim();
+    const senhaLogin = document.getElementById('senhaLogin').value.trim();
+
+    // Verifica se o login é válido
+    if (emailLogin === usuario.email && senhaLogin === usuario.senha) {
+        alert('Login realizado com sucesso! Bem-vindo ao sistema!');
+    } else {
+        alert('Erro: Dados inválidos ou incorretos. Por favor, tente novamente.');
+    }
+});
+
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #ffe4e1;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    background-color: #ff94b7;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+form {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    color: #ff94b7;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #ff94b7;
+}
+
+button {
+    background-color: #ff94b7;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #ff74a1;
+}
+
+p {
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+button {
+    background-color: #ff94b7;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease; /* Adiciona uma transição suave */
+
+    button:hover {
+        transform: rotate(3deg);
+    }
+    
+}
+
+button:hover {
+    background-color: #ff74a1; /* Muda a cor ao passar o mouse */
+    transform: scale(1.1); /* Aumenta o botão ligeiramente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra ao botão */
+}
+
+
+.destaque {
+    color: #ff1493;
+    font-weight: bold;
+}
+
+@keyframes flutuar {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
