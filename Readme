@@ -1,0 +1,2 @@
+Enunciado:
+O código representa um formulário de cadastro em HTML com estilização em CSS e funcionalidade em JavaScript. Ele permite aos usuários inserir seus dados pessoais (nome, endereço, telefone, email e senha). Após o preenchimento, o sistema exibe uma mensagem de sucesso e um botão "Voltar". Há também funcionalidades para armazenar os dados do cadastro em um objeto usuario, verificar os campos preenchidos, e validar o login posteriormente. Além disso, há animações e interações como estilos que mudam ao passar o mouse sobre os botões.
